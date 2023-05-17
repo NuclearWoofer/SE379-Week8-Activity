@@ -3,18 +3,25 @@ import axios from 'axios';
 
 const baseURL = 'http://localhost:3000';
 
-export const useFetch = (url) => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+interface Props {
+  url: string;
+  data: string;
+  loading: boolean;
+  error: string;
+}
+
+export const useFetch = (url: string): Props => {
+  const [data, setData] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${baseURL}${url}`);
-        setData(response.data);
+        setData(response.data as string);
       } catch (error) {
-        setError(true);
+        setError(error.message);
       } finally {
         setLoading(false);
       }

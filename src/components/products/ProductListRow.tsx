@@ -1,8 +1,13 @@
+import { Product } from '../../types/product';
 import { Card } from '../Card';
 import { Thumbnail } from '../Thumbnail';
 import { Link } from 'react-router-dom';
 
-export const ProductListRow = ({ product }) => {
+interface Props{
+  product: Product;
+}
+
+export const ProductListRow = ({ product }: Props) => {
   return (
     <Card
       style={{
@@ -12,7 +17,7 @@ export const ProductListRow = ({ product }) => {
         alignItems: 'center',
       }}
     >
-      <Thumbnail description={product.description} image={product.image} />
+      <Thumbnail description={product.description} image={product.image} width={0} />
       <Link key={product.id} to={`${product.id}`}>
         {product.title}
       </Link>
